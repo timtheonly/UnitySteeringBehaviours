@@ -14,6 +14,7 @@ namespace BGE.States
         {
         }
 
+
         public void Update()
         {
             if (currentState != null)

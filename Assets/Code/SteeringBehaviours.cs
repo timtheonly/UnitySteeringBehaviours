@@ -12,6 +12,7 @@ namespace BGE
         public Vector3 velocity;
         public Vector3 acceleration;
         public Vector3 sphereCentre;
+		public float dist;
 
         public float defaultRadius = 5.0f;
 
@@ -683,7 +684,8 @@ namespace BGE
 
             float slowingDistance = 8.0f;
             float distance = toTarget.magnitude;
-            if (distance == 0.0f)
+			dist = distance;
+            if(distance == 0.0f)
             {
                 return Vector3.zero;
             }
@@ -896,7 +898,7 @@ namespace BGE
         // Use this for initialization
         void Start()
         {
-            maxSpeed = Params.GetFloat("max_speed");
+            //maxSpeed = Params.GetFloat("max_speed");
             wanderTargetPos = UnityEngine.Random.insideUnitSphere * Params.GetFloat("wander_radius");
         }
 

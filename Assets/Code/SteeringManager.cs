@@ -9,7 +9,6 @@ namespace BGE
 {
     public class SteeringManager : MonoBehaviour
     {
-        List<Scenario> scenarios = new List<Scenario>();
         
         public Scenario currentScenario;
         StringBuilder message = new StringBuilder();
@@ -20,11 +19,10 @@ namespace BGE
         public GameObject leaderPrefab;
         public Space space;
         static SteeringManager instance;
-        // Use this for initialization
-        GUIStyle style = new GUIStyle();
-
+        
         float[] timeModifiers = { 0.2f, 0.5f, 1.0f, 2.0f, 0.0f };
         int timeModIndex = 2;
+        public bool ending = false;
         
         GameObject monoCamera;
         GameObject activeCamera;
@@ -40,21 +38,11 @@ namespace BGE
             instance = this;
             Screen.showCursor = false;
 
-            style.fontSize = 18;
-            style.normal.textColor = Color.white;
 
             space = new Space();
             
-            scenarios.Add(new SeekScenario());
-            scenarios.Add(new ArriveScenario());
-            scenarios.Add(new PursueScenario());
-            scenarios.Add(new WanderScenario());
-            scenarios.Add(new PathFollowingScenario());
-            scenarios.Add(new ObstacleAvoidanceScenario());
-            scenarios.Add(new FlockingScenario());
-            scenarios.Add(new StateMachineScenario());
-            scenarios.Add(new PathFindingScenario());
-            currentScenario = scenarios[0];
+            
+			currentScenario = new scene ();
             currentScenario.Start();
 
             monoCamera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -76,7 +64,7 @@ namespace BGE
         {
             if (Params.showMessages)
             {
-                GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "" + message, style);
+                GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "" + message);
             }
             if (Event.current.type == EventType.Repaint)
             {
@@ -90,21 +78,9 @@ namespace BGE
                     Params.camMode = (Params.camMode + 1) % 3;
                 }
 
-                for (int i = 0; i < scenarios.Count; i++)
-                {
-                    if (Event.current.keyCode == KeyCode.Alpha0 + i)
-                    {
-                        currentScenario.TearDown();
-                        currentScenario = scenarios[i];
-                        currentScenario.Start();                        
-                    }
-                }
 
                 if (Event.current.keyCode == KeyCode.R)
                 {
-                    currentScenario.TearDown();
-                    currentScenario = scenarios[6];
-                    currentScenario.Start();
                     Params.showMessages = false;
                     Params.riftEnabled = true;
                     timeModIndex = 0;
@@ -216,23 +192,10 @@ namespace BGE
                 riftCamera.SetActive(false);
                 activeCamera = monoCamera;
             }
-            PrintMessage("Press F1 to toggle camera mode");
-            PrintMessage("Press F2 to adjust speed");
-            PrintMessage("Press F4 to toggle messages");
-            PrintMessage("Press F5 to toggle vector drawing");
-            PrintMessage("Press F6 to toggle debug drawing");
-            PrintMessage("Press F7 to level camera");
-            PrintMessage("Press F8 to toggle cell space partitioning");
-            PrintMessage("Press F9 to toggle non-penetration constraint");
-            PrintMessage("Press F10 to toggle Rift");
-            PrintMessage("Press F11 to toggle force drawing");
             int fps = (int)(1.0f / Time.deltaTime);
             PrintFloat("FPS: ", fps);
             PrintMessage("Current scenario: " + currentScenario.Description());
-            for (int i = 0; i < scenarios.Count; i++)
-            {
-                PrintMessage("Press " + i + " for " + scenarios[i].Description());
-            }
+            
            
             switch (Params.camMode)
             {
