@@ -20,7 +20,7 @@ namespace BGE.Scenarios
         public override void Start()
         {
             /*
-             * Puddle jumper starts fleeing 
+             * Puddle jumper starts with fleeing 
              */
             puddle_jumper = CreateBoid(new Vector3(-49.858f, -158.44f, 163.976f), leaderPrefab);
             puddle_jumper.transform.localScale = new Vector3(8.5f, 8.5f, 8.5f);
@@ -30,7 +30,9 @@ namespace BGE.Scenarios
              * Set up camera
              */
             m_camera = Camera.main;
-            m_camera.transform.position = new Vector3(1200,1100,900);
+            m_camera.transform.position = new Vector3(550,600,550);
+            GameObject satellite = GameObject.FindGameObjectWithTag("satellite");
+            m_camera.transform.LookAt(satellite.transform);
         }
 	}
 }
