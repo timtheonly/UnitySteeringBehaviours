@@ -35,8 +35,9 @@ namespace BGE.States
 
         public override void Update() {
             Vector3 distance = entity.transform.position - target;
-            if (distance.magnitude < 1.0f)
+            if (distance.magnitude < 0.1f)
             {
+                SteeringManager.Instance.wraithEntry = true;
                 entity.GetComponent<SteeringBehaviours>().ArriveEnabled = false;
                 entity.GetComponent<StateMachine>().SwicthState(new Cloaked(entity));
             }

@@ -15,14 +15,22 @@ namespace BGE
         
         public GameObject camFighter;
 
-        public GameObject boidPrefab;
+        // prefabs for the scene
+        public GameObject PuddleJumperPrefab;
+        public GameObject WraithleaderPrefab;
+
         public GameObject leaderPrefab;
+        public GameObject boidPrefab;
+
         public Space space;
         static SteeringManager instance;
         
         float[] timeModifiers = { 0.2f, 0.5f, 1.0f, 2.0f, 0.0f };
         int timeModIndex = 2;
+
+        //bools for states
         public bool ending = false;
+        public bool wraithEntry = false;
         
         GameObject monoCamera;
         GameObject activeCamera;

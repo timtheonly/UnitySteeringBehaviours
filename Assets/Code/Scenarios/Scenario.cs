@@ -11,6 +11,9 @@ namespace BGE.Scenarios
     {
         System.Random random = new System.Random(DateTime.Now.Millisecond);
 
+        public GameObject PuddleJumperPrefab = SteeringManager.Instance.PuddleJumperPrefab;
+        public GameObject WraithleaderPrefab = SteeringManager.Instance.WraithleaderPrefab;
+
         public GameObject leaderPrefab = SteeringManager.Instance.leaderPrefab;
         public GameObject boidPrefab = SteeringManager.Instance.boidPrefab;
 
