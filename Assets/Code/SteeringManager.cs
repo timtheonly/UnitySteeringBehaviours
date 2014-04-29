@@ -197,7 +197,7 @@ namespace BGE
             }
             else
             {
-                riftCamera.SetActive(false);
+                //riftCamera.SetActive(false);
                 activeCamera = monoCamera;
             }
             int fps = (int)(1.0f / Time.deltaTime);

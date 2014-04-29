@@ -6,14 +6,14 @@ using UnityEngine;
 
 namespace BGE.States
 {
-	class Fleeing : State
+	class FleeingState : State
 	{
         Vector3 target;
-        public Fleeing(GameObject entity) : base(entity) {
+        public FleeingState(GameObject entity) : base(entity) {
             target = new Vector3(250, 500, -250);
         }
 
-        public Fleeing(GameObject entity, Vector3 target): base(entity)
+        public FleeingState(GameObject entity, Vector3 target): base(entity)
         {
             this.target = target;
         }
@@ -28,6 +28,7 @@ namespace BGE.States
             entity.GetComponent<SteeringBehaviours>().ArriveEnabled = true;
             entity.GetComponent<SteeringBehaviours>().seekTargetPos = target;
             entity.GetComponent<SteeringBehaviours>().maxSpeed = 1000;
+            entity.GetComponent<SteeringBehaviours>().maxForce = 50;
         }
         public override void Exit() { 
         
@@ -35,11 +36,11 @@ namespace BGE.States
 
         public override void Update() {
             Vector3 distance = entity.transform.position - target;
-            if (distance.magnitude < 0.1f)
+            if (distance.magnitude < 1.0f)
             {
                 SteeringManager.Instance.wraithEntry = true;
                 entity.GetComponent<SteeringBehaviours>().ArriveEnabled = false;
-                entity.GetComponent<StateMachine>().SwicthState(new Cloaked(entity));
+                entity.GetComponent<StateMachine>().SwicthState(new CloakedState(entity));
             }
         
         }
