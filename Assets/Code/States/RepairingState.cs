@@ -20,7 +20,7 @@ namespace BGE.States
             if (entity.CompareTag("wraith_leader"))
             {
                 entity.GetComponent<SteeringBehaviours>().ArriveEnabled = true;
-                entity.GetComponent<SteeringBehaviours>().seekTargetPos = new Vector3(-21000, 2500, -40000);
+                entity.GetComponent<SteeringBehaviours>().seekTargetPos = new Vector3(-21000, 2000, -40000);
                 entity.GetComponent<SteeringBehaviours>().maxSpeed = 1000;
                 entity.GetComponent<SteeringBehaviours>().maxForce = 100;
             }

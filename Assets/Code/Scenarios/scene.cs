@@ -31,7 +31,7 @@ namespace BGE.Scenarios
             /*
              * wraith leader starts off hidden
              */
-            wraith_leader = CreateBoid(new Vector3(-20000, 2500, 20000), WraithleaderPrefab);
+            wraith_leader = CreateBoid(new Vector3(-20000, 2000, 20000), WraithleaderPrefab);
             wraith_leader.transform.localScale = new Vector3(1.5f,1.5f,1.5f);
             wraith_leader.tag = "wraith_leader";
             wraith_leader.AddComponent<StateMachine>().SwicthState(new HiddenState(wraith_leader));
@@ -68,13 +68,16 @@ namespace BGE.Scenarios
             fleet_member.GetComponent<SteeringBehaviours>().maxSpeed = 200;
             fleet_member.GetComponent<SteeringBehaviours>().maxForce = 100;
             fleet_member.AddComponent<StateMachine>().SwicthState(new HiddenState(fleet_member));
-          
+            
+            //get the satellite from the scene and add a state machine
+            GameObject satellite = GameObject.FindGameObjectWithTag("satellite");
+            satellite.AddComponent<StateMachine>().SwicthState(new IdleState(satellite));
             /*
              * Set up camera
              */
             m_camera = Camera.main;
             m_camera.transform.position = new Vector3(550,1000,550);
-            GameObject satellite = GameObject.FindGameObjectWithTag("satellite");
+            
             m_camera.transform.LookAt(satellite.transform);
         }
 	}

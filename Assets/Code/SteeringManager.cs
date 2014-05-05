@@ -31,6 +31,7 @@ namespace BGE
         //bools for states
         public bool ending = false;
         public bool wraithEntry = false;
+        public bool target_destroyed = false;
         
         GameObject monoCamera;
         GameObject activeCamera;
