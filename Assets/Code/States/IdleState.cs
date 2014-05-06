@@ -22,7 +22,7 @@ namespace BGE.States
         public override void Enter()
         {
             target = GameObject.FindGameObjectWithTag("target");
-            range = 25000.0f;
+            range = 27000.0f;
         }
         public override void Exit()
         {

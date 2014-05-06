@@ -9,7 +9,6 @@ namespace BGE.States
     class HiddenState : InvisibleState
     {
         public HiddenState(GameObject entity) : base(entity) { }
-        List<Color> origionalColors = new List<Color>();
 
         public override string Description()
         {

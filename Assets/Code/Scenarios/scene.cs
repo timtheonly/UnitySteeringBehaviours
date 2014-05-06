@@ -41,20 +41,22 @@ namespace BGE.Scenarios
             */
             Vector3 offset = new Vector3(5000, 0, 1500);
             fleet_member = CreateBoid(wraith_leader.transform.position + offset, boidPrefab);
+            fleet_member.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
             fleet_member.GetComponent<SteeringBehaviours>().leader = wraith_leader;
             fleet_member.GetComponent<SteeringBehaviours>().offset = offset;
             fleet_member.GetComponent<SteeringBehaviours>().seekTargetPos = new Vector3(0, 0, 10);
-            fleet_member.GetComponent<SteeringBehaviours>().maxSpeed = 250;
-            fleet_member.GetComponent<SteeringBehaviours>().maxForce = 100;
+            fleet_member.GetComponent<SteeringBehaviours>().maxSpeed = 500;
+            fleet_member.GetComponent<SteeringBehaviours>().maxForce = 150;
             fleet_member.AddComponent<StateMachine>().SwicthState(new HiddenState(fleet_member));
 
             offset = new Vector3(15000, 0, 4000);
             fleet_member = CreateBoid(wraith_leader.transform.position + offset, boidPrefab);
+            fleet_member.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
             fleet_member.GetComponent<SteeringBehaviours>().leader = wraith_leader;
             fleet_member.GetComponent<SteeringBehaviours>().offset = offset;
             fleet_member.GetComponent<SteeringBehaviours>().seekTargetPos = new Vector3(250, 0, 250);
-            fleet_member.GetComponent<SteeringBehaviours>().maxSpeed = 250;
-            fleet_member.GetComponent<SteeringBehaviours>().maxForce = 100;
+            fleet_member.GetComponent<SteeringBehaviours>().maxSpeed = 500;
+            fleet_member.GetComponent<SteeringBehaviours>().maxForce = 150;
             fleet_member.AddComponent<StateMachine>().SwicthState(new HiddenState(fleet_member));
 
 
@@ -65,7 +67,7 @@ namespace BGE.Scenarios
             fleet_member.GetComponent<SteeringBehaviours>().leader = wraith_leader;
             fleet_member.GetComponent<SteeringBehaviours>().offset = offset;
             fleet_member.GetComponent<SteeringBehaviours>().seekTargetPos = new Vector3(0, 0, 100);
-            fleet_member.GetComponent<SteeringBehaviours>().maxSpeed = 200;
+            fleet_member.GetComponent<SteeringBehaviours>().maxSpeed = 750;
             fleet_member.GetComponent<SteeringBehaviours>().maxForce = 100;
             fleet_member.AddComponent<StateMachine>().SwicthState(new HiddenState(fleet_member));
             

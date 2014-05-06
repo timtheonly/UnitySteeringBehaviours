@@ -20,7 +20,7 @@ namespace BGE.States
         {
             entity.GetComponentInChildren<Light>().intensity = 0.0f;
             entity.GetComponentInChildren<Light>().enabled = true;
-            range = 22500;
+            range = 25000;
         }
         public override void Exit()
         {
@@ -29,6 +29,7 @@ namespace BGE.States
 
         public override void Update()
         {
+            
             GameObject target = GameObject.FindGameObjectWithTag("target");
             SteeringManager.PrintFloat("Distance ", (target.transform.position - entity.transform.position).magnitude);
             SteeringManager.PrintFloat("Range ", range);

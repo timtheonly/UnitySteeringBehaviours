@@ -21,8 +21,8 @@ namespace BGE.States
             {
                 entity.GetComponent<SteeringBehaviours>().ArriveEnabled = true;
                 entity.GetComponent<SteeringBehaviours>().seekTargetPos = new Vector3(-21000, 2000, -40000);
-                entity.GetComponent<SteeringBehaviours>().maxSpeed = 1000;
-                entity.GetComponent<SteeringBehaviours>().maxForce = 100;
+                entity.GetComponent<SteeringBehaviours>().maxSpeed = 1500;
+                entity.GetComponent<SteeringBehaviours>().maxForce = 125;
             }
             else {
                 entity.GetComponent<SteeringBehaviours>().ObstacleAvoidanceEnabled = true;
@@ -34,12 +34,18 @@ namespace BGE.States
 
         public override void Update()
         {
-            
+            if (SteeringManager.Instance.target_destroyed)
+            {
+                entity.GetComponent<StateMachine>().SwicthState(new SeekingEnemyState(entity));
+            }
         }
 
         public override void Exit()
         {
-            
+            entity.GetComponent<SteeringBehaviours>().ObstacleAvoidanceEnabled = false;
+            entity.GetComponent<SteeringBehaviours>().OffsetPursuitEnabled = false;
+            entity.GetComponent<SteeringBehaviours>().SeparationEnabled = false;
+            entity.GetComponent<SteeringBehaviours>().PlaneAvoidanceEnabled = false;
         }
     }
 }

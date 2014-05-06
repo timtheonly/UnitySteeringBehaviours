@@ -10,11 +10,16 @@ namespace BGE
         GameObject target;
 
         public bool rayCastEnabled;
+
+        //don't want the wraith ship to be destroyed imediatly
+        float time_elapsed;
+        float time_wait =0.5f;
+
         // Use this for initialization
         void Start()
         {
             line = gameObject.GetComponent<LineRenderer>();
-            line.enabled = false;
+            line.enabled = true;
             rayCastEnabled = false;
         }
 
@@ -28,7 +33,7 @@ namespace BGE
             {
                 line.enabled = true;
                 //need to find direction to rotate
-                Vector3 direction = (target.transform.position + new Vector3(0, 1500, 0)) - transform.position;//add offset to targets position as y value is not always true
+                Vector3 direction = (target.transform.position + new Vector3(0, 1600, 0)) - transform.position;//add offset to targets position as y value is not always true
                 transform.rotation = Quaternion.LookRotation(direction);
 
                 Ray ray = new Ray(transform.position, transform.forward);
@@ -42,8 +47,12 @@ namespace BGE
                 {
                     if (hit.transform.gameObject.CompareTag("target"))
                     {
-                        SteeringManager.Instance.target_destroyed = true;
-                        Destroy(hit.transform.gameObject);
+                        if (time_elapsed > time_wait)
+                        {
+                            SteeringManager.Instance.target_destroyed = true;
+                            Destroy(hit.transform.gameObject);
+                        }
+                        time_elapsed += Time.deltaTime;
                     }
                 }
             }
